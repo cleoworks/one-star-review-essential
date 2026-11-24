@@ -18,12 +18,18 @@ REVIEW_PARTS = (
 REVIEW = " ".join(REVIEW_PARTS)
 
 
+def write_review(path="/output/entry.txt") -> None:
+    directory = os.path.dirname(path)
+    if directory:
+        os.makedirs(directory, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(REVIEW)
+
+
 def main() -> None:
     # The review is exactly one line: assert no newline sneaks in.
     assert "\n" not in REVIEW and len(REVIEW) == 88
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as f:
-        f.write(REVIEW)
+    write_review()
 
 
 if __name__ == "__main__":

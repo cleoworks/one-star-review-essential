@@ -10,13 +10,17 @@
 
 import os
 
-REVIEW = (
-    "One star. My thumbs type the wrong letter "
-    "with total confidence, then blame autocorrect."
+# Two halves, joined with a single space: the grievance, then the turn.
+REVIEW_PARTS = (
+    "One star. My thumbs type the wrong letter",
+    "with total confidence, then blame autocorrect.",
 )
+REVIEW = " ".join(REVIEW_PARTS)
 
 
 def main() -> None:
+    # The review is exactly one line: assert no newline sneaks in.
+    assert "\n" not in REVIEW and len(REVIEW) == 88
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(REVIEW)
